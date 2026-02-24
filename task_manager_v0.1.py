@@ -9,8 +9,14 @@ print('4. Удалить задачу')
 print('5. Закрыть <Task Manager>')
 print('==========================')
 
-select = int(input("Выберите действие: "))
 tasks = []
+select = 0
+
+try:
+	select = int(input("Выберите действие: "))
+except ValueError:
+	print('❌ Неверно. Вводите только цифры.')
+	select = 0
 
 while select != 5:
 
@@ -18,7 +24,6 @@ while select != 5:
 	if select == 1:
 		print()
 		print(f'Выбрано: Вывести список задач')
-		print()
 
 		if len(tasks) == 0:
 			print('--------------------')
@@ -26,10 +31,8 @@ while select != 5:
 			print('--------------------')
 			print()
 		else:
-			print()
 			print('--------------------')
 			print('Список задач: ')
-			print()
 
 			for i in tasks:
 				print(f'--> {i}')
@@ -48,10 +51,10 @@ while select != 5:
 
 		# Добавление в список задач
 		tasks.append(new_task_name.capitalize())
-		print()
 		sleep(1)
 		print('Задача успешно добавлена!')
-		print('Для проверки нажмите 1')
+		sleep(1)
+		print('Чтобы проверить нажмите <1>')
 		sleep(1)
 		print()
 
@@ -77,15 +80,24 @@ while select != 5:
 			sleep(1)
 			print()
 		else:
-			print()
-			print(f"Выбрана: <{tasks[i]}>")
-			print()
+			print(f"Выбрана: <{select_task}>")
 			sleep(1)
 			print('--------------------')
 			print("1. Отметить выполненой\n2. Изменить название")
 			print('--------------------')
 
-			chg_task = int(input("Выберите действие над задачей:"))
+			chg_task = int(input("Выберите действие над задачей: "))
+			print()
+
+			if chg_task == 1:
+				tasks[i] = select_task
+				print(f'Задача отмечена выполненой: {select_task}')
+				sleep(1)
+				print()
+			elif chg_task == 2:
+				select_task = str(input("Введите новое название задачи: "))
+				tasks[i] = select_task
+				print(f'Новое название: {tasks[i]}')
 
 	# Удалить задачу
 	elif select == 4:
@@ -106,13 +118,13 @@ while select != 5:
 			print('Нет такой задачи.')
 			print()
 		else:
-			print()
 			print(f'Будет удалена задача: {del_task}')
 			delete = str(input('Удалить? (Y/N): '))
 
 			if delete == 'Y' or delete == 'y':
-				print(f'Задача {del_task} удалена.')
 				tasks.remove(del_task)
+				print(f'Задача {del_task} удалена.')
+				print()
 			elif delete == 'N' or delete == 'n':
 				print('Отмена удаления задачи.')
 
@@ -125,8 +137,14 @@ while select != 5:
 	print('5. Закрыть <Task Manager>')
 	print('==========================')
 
-	select = int(input("Выберите действие: "))
+	try:
+		print()
+		select = int(input("Выберите действие: "))
+	except ValueError:
+		print('❌ Ошибка. Вы ввели не цифру.')
+		select = 0
+		print()
 
-print('------------------------')
-print('До скорой встречи создатель.')
-print('------------------------')
+print()
+print('До скорой встречи.')
+print()
