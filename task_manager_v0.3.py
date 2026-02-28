@@ -89,13 +89,15 @@ while select != 5:
 			chg_task = str(input("Выберите действие над задачей: "))
 
 			if int(chg_task) == 1:
-				if tasks[i] != (select_task + " \u2705"):
-					print("⚠️ Задача уже выполнена!")
-					chg_task = str(input("Выберите действие над задачей: "))
+				if select_task.endswith(" \u2705"):
+					print("⚠️  Задача уже отмечена как выполненная.")
+					sleep(1)
+					print()
 				else:
 					tasks[i] = select_task + " \u2705"
-					print(f'Задача <{select_task}> отмечена выполненой')
+					print(f'Задача <{select_task}> отмечена выполненой \u2705')
 					print()
+					sleep(1)
 
 			elif int(chg_task) == 2:
 				select_task = str(input("Введите новое название задачи: "))
